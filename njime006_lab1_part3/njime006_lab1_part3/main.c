@@ -21,11 +21,33 @@ int main(void)
         // 2) Perform computation
         // if PA3PA0 is 1, set PC3PC0 = 0000, else = 1111
         if (tmpA == 0x0F) { // True if PA0 is 1
-            cntAvail = (cntAvail & 0xF0) | 0x00; // Sets tmpB to bbbb0000
+            cntAvail = (cntAvail & 0xF0) | 0x80; // Sets tmpB to bbbb0000
             // (clear rightmost 4 bits, then set to 0000)
         }
-        else {
-            cntAvail = (cntAvail & 0xF0) | 0x0F; 
+        else
+        {
+            if (tmpA == 0x07 || tmpA == 0x0B || tmpA == 0x0D || tmpA == 0x0E)
+            {
+                cntAvail = (cntAvail & 0xF0) | 0x01;
+            }
+            else
+            {
+                if (tmpA == 0x03 || tmpA == 0x05 || tmpA == 0x06 || tmpA == 0x09 || tmpA == 0x0A)
+                {
+                    cntAvail = (cntAvail & 0xF0) | 0x02;
+                }
+                else
+                {
+                    if (tmpA == 0x01 || tmpA == 0x02 || tmpA == 0x04 || tmpA == 0x08)
+                    {
+                        cntAvail = (cntAvail & 0xF0) | 0x03;
+                    }
+                    else
+                    {
+                        cntAvail = (cntAvail & 0xF0) | 0x04;
+                    }
+                }
+            }
         }
         // 3) Write output
         PORTC = cntAvail;
