@@ -50,7 +50,7 @@ int main(void)
 					break;
 				
 				case 3:
-					tmpC = tmpC | 0x20;
+					tmpC = tmpC | 0x30;
 					tmpC = tmpC | 0x40;
 					break;
 				
